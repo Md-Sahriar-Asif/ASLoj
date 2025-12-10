@@ -43,7 +43,7 @@ def logout_view(request):
 @login_required
 def home_view(request):
     # Top 5 users (by points)
-    top_users = User.objects.filter(is_staff=False).order_by('-points')[:8]
+    top_users = User.objects.filter(is_staff=True).order_by('-points')[:8]
 
     # Active contests (currently running)
     now = timezone.now()
@@ -760,7 +760,7 @@ def contest_standings(request, contest_id):
 User = get_user_model()
 def leaderboard_view(request):
     # Get all users ordered by points descending
-    users = User.objects.filter(is_staff=False).order_by('-points')
+    users = User.objects.filter(is_staff=True).order_by('-points')
 
     # Pagination: 10 per page
     paginator = Paginator(users, 5)
