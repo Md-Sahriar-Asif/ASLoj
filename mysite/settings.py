@@ -30,6 +30,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['.vercel.app', '*']
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://*.onrender.com',
+]
 
 # Application definition
 
