@@ -38,7 +38,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     university_id = models.CharField(max_length=50, unique=True)
     email = models.EmailField(unique=True)
     is_active = models.BooleanField(default=True)
-    is_staff = models.BooleanField(default=False)
+    is_staff = models.BooleanField(default=True)
 
     phone = models.CharField(max_length=20, blank=True, null=True)
     points = models.IntegerField(default=0)
