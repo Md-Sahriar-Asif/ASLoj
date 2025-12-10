@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ discussion.title }}</title>
+  <link rel="stylesheet" href="{% static 'css/community.css' %}">
+</head>
+<body>
+  {% include "nav.html" %}
+
+  <div class="container">
+    <h2>{{ discussion.title }}</h2>
+    <p>{{ discussion.content }}</p>
+    <p class="meta">Posted by <b>{{ discussion.author.full_name }}</b> on {{ discussion.created_at|date:"M d, Y H:i" }}</p>
+
+    <hr>
+
+    <h3>Comments</h3>
+    {% for c in comments %}
+      <div class="comment">
+        <b>{{ c.author.full_name }}</b>: {{ c.content }}
+        <div class="meta">{{ c.created_at|date:"M d, Y H:i" }}</div>
+      </div>
+    {% empty %}
+      <p>No comments yet. Be the first to reply!</p>
+    {% endfor %}
+
+    <form method="POST" class="comment-form">
+      {% csrf_token %}
+      <textarea name="content" rows="2" placeholder="Write a comment..." required></textarea>
+      <button type="submit">Reply</button>
+    </form>
+  </div>
+</body>
+</html>

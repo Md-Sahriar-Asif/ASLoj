@@ -1,0 +1,30 @@
+<footer class="text-center text-white" style="background-color: #002147; margin-top: 4rem;">
+  <div class="container py-4">
+
+    <!-- University Address  and color of the logo -- #C21878 -->
+    <div class="mb-2">
+      <p class="mb-1">
+        <strong>University of Asia Pacific</strong><br>
+        74/A Green Road, Dhaka-1205, Bangladesh<br>
+        <a href="https://www.uap-bd.edu/" target="_blank" class="text-light text-decoration-underline">
+          Visit Official Website
+        </a>
+      </p>
+    </div>
+
+    <!-- Developer Link -->
+    <div class="mb-3">
+      <a href="{% url 'about_developers' %}" class="text-white text-decoration-none">
+        <strong>Meet Our Developers</strong>
+      </a>
+    </div>
+
+    <!-- Copyright -->
+    <div style="border-top: 1px solid rgba(0, 255, 255); padding-top: 10px;">
+      <small>
+        &copy; {{ now|date:"Y" }} University of Asia Pacific. All Rights Reserved.
+      </small>
+    </div>
+
+  </div>
+</footer>

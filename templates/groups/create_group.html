@@ -1,0 +1,18 @@
+{% extends "nav.html" %}
+{% load static %}
+
+{% block content %}
+<div class="group-page">
+<link rel="stylesheet" href="{% static 'css/groups.css' %}">
+
+<div class="form-container fade-in">
+  <h2>Create New Group</h2>
+  <form method="POST">
+    {% csrf_token %}
+    <input type="text" name="name" placeholder="Group Name" required class="input-field">
+    <button type="submit" class="btn btn-submit">Create Group</button>
+  </form>
+</div>
+</div>
+{% include "footer.html" %}
+{% endblock %}

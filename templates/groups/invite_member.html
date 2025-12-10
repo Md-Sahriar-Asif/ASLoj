@@ -1,0 +1,18 @@
+{% extends "nav.html" %}
+{% load static %}
+
+{% block content %}
+<div class="group-page">
+<link rel="stylesheet" href="{% static 'css/groups.css' %}">
+
+<div class="form-container fade-in">
+  <h2>Invite Member to {{ group.name }}</h2>
+  <form method="POST">
+    {% csrf_token %}
+    <input type="email" name="email" placeholder="Enter user's email" required class="input-field">
+    <button type="submit" class="btn btn-submit">Send Invitation</button>
+  </form>
+</div>
+</div>
+{% include "footer.html" %}
+{% endblock %}

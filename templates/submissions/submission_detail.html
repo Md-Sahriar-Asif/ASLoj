@@ -1,0 +1,98 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/submissions.css' %}">
+    <title>Submission {{ submission.id }}</title>
+</head>
+<body>
+    {% include "nav.html" %}
+
+    {% block content %}
+    <div class="container mt-4 submission-detail">
+
+        <!-- Submission Info -->
+        <h2 class="mb-3">Submission #{{ submission.id }}</h2>
+
+        <div class="card mb-4">
+            <div class="card-body">
+                <p><strong>Problem:</strong> {{ submission.problem.title }}</p>
+                <p>
+                    <strong>Status:</strong>
+                    {% if submission.status == "AC" %}
+                        <span class="badge bg-success">Accepted</span>
+                    {% elif submission.status == "WA" %}
+                        <span class="badge bg-danger text-dark">Wrong Answer</span>
+                    {% elif submission.status == "RE" %}
+                        <span class="badge bg-warning">Runtime Error</span>
+                    {% elif submission.status == "TLE" %}
+                        <span class="badge bg-secondary">Time Limit Exceeded</span>
+                    {% else %}
+                        <span class="badge bg-info text-dark">Pending</span>
+                    {% endif %}
+                </p>
+                <p><strong>Language:</strong> {{ submission.get_language_display }}</p>
+                <p><strong>Submitted on:</strong> {{ submission.created_at|date:"Y-m-d H:i:s" }}</p>
+            </div>
+        </div>
+
+        <!-- Code -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <strong>Submitted Code</strong>
+            </div>
+            <div class="card-body">
+                <pre class="submission-code"><code>{{ code_content|escape }}</code></pre>
+            </div>
+        </div>
+
+        <!-- Test Case Results -->
+        {% if results %}
+        <div class="card mb-4">
+            <div class="card-header bg-primary text-white">
+                <strong>Testcase Results</strong>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered table-hover">
+                    <thead class="table-light">
+                        <tr>
+                            <th>#</th>
+                            <th>Input</th>
+                            <th>Expected Output</th>
+                            <th>Your Output</th>
+                            <th>Error Output</th>
+                            <th>Verdict</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for r in results %}
+                        <tr class="{% if r.verdict == 'AC' %}table-success{% elif r.verdict == 'WA' %}table-warning{% elif r.verdict == 'RE' %}table-danger{% elif r.verdict == 'TLE' %}table-secondary{% endif %}">
+                            <td>{{ forloop.counter }}</td>
+                            <td><pre>{{ r.input }}</pre></td>
+                            <td><pre>{{ r.expected }}</pre></td>
+                            <td><pre>{{ r.actual }}</pre></td>
+                            <td><pre>{{ r.stderr }}</pre></td>
+                            <td><strong>{{ r.verdict }}</strong></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- Navigation Buttons -->
+        <div class="d-flex gap-2">
+            <a href="{% url 'submission_list' %}" class="btn btn-secondary">Back to Submissions</a>
+            <a href="{% url 'problem_detail' submission.problem.pk %}" class="btn btn-primary">Back to Problem</a>
+        </div>
+
+    </div>
+    {% endblock %}
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

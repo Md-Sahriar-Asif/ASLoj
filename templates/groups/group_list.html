@@ -1,0 +1,52 @@
+{% extends "nav.html" %}
+{% load static %}
+
+{% block content %}
+<div class="group-page">
+<link rel="stylesheet" href="{% static 'css/groups.css' %}">
+
+<div class="group-container fade-in">
+  <h2>👥 My Groups</h2>
+  <a href="{% url 'create_group' %}" class="btn-create">+ Create Group</a>
+
+  <div class="group-section">
+    {% for group in user_groups %}
+      <div class="group-card">
+        <h3><a style="text-decoration: none" href="{% url 'group_detail' group.id %}">{{ group.name }}</a></h3>
+        <p><strong>Members:</strong> {{ group.members.count }}</p>
+        <div class="group-actions">
+          {% if request.user in group.members.all %}
+            <a href="{% url 'invite_member' group.id %}" class="btn btn-invite">Invite Member</a>
+          {% endif %}
+          <a href="{% url 'leave_group' group.id %}" class="btn btn-leave">Leave</a>
+          {% if group.created_by == request.user %}
+            <a href="{% url 'delete_group' group.id %}" class="btn btn-delete">Delete</a>
+          {% endif %}
+        </div>
+      </div>
+    {% empty %}
+      <p>No groups yet. Create one!</p>
+    {% endfor %}
+  </div>
+
+  <hr>
+
+  <h3>📩 Pending Invitations</h3>
+  <div class="invitation-section">
+    {% for inv in invitations %}
+      <div class="invitation-card">
+        <p><b>{{ inv.group.name }}</b> invited by {{ inv.invited_by.full_name }}</p>
+        <div class="invitation-actions">
+          <a href="{% url 'respond_invitation' inv.id 'accept' %}" class="btn btn-accept">Accept</a>
+          <a href="{% url 'respond_invitation' inv.id 'decline' %}" class="btn btn-decline">Decline</a>
+        </div>
+      </div>
+    {% empty %}
+      <p>No pending invitations.</p>
+    {% endfor %}
+  </div>
+</div>
+</div>
+{% include "footer.html" %}
+{% endblock %}
+

@@ -1,0 +1,71 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Leaderboard | ASLOJ</title>
+  <link rel="stylesheet" href="{% static 'css/leaderboard.css' %}">
+</head>
+<body>
+
+  {% include "nav.html" %}
+
+  <!-- Leaderboard Section -->
+  <div class="leaderboard-container fade-in">
+    <div class="leaderboard-header">
+      🏆 UAP Leaderboard
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Rank</th>
+          <th>Full Name</th>
+          <th>University ID</th>
+          <th>Points</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for user in page_obj %}
+          <tr
+            {% if user.id == request.user.id %}
+              class="highlight"
+              onmouseenter="this.querySelectorAll('td, td *').forEach(function(el){ el.style.color = 'black'; });"
+              onmouseleave="this.querySelectorAll('td, td *').forEach(function(el){ el.style.color = ''; });"
+            {% endif %}
+          >
+            <td>{{ forloop.counter|add:page_obj.start_index|add:"-1" }}</td>
+            <td>{{ user.full_name }}</td>
+            <td>{{ user.university_id }}</td>
+            <td>{{ user.points }}</td>
+          </tr>
+        {% empty %}
+          <tr>
+            <td colspan="4">No users yet.</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <div class="pagination">
+      {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}">« Prev</a>
+      {% endif %}
+
+      <a class="active">Page {{ page_obj.number }}</a>
+
+      {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">Next »</a>
+      {% endif %}
+    </div>
+  </div>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById("menu").classList.toggle("show");
+    }
+  </script>
+{% include "footer.html" %}
+</body>
+</html>

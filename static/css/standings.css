@@ -1,0 +1,95 @@
+/* Container */
+.container {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 0 20px;
+    font-family: Arial, sans-serif;
+}
+
+/* Title */
+.title {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+/* Card */
+.card {
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    padding: 20px;
+}
+
+.card-body {
+    width: 100%;
+}
+
+/* Standings Table */
+.standings-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 15px;
+    text-align: center;
+}
+
+.standings-table thead {
+    background: #f1f5f9;
+    font-weight: 700;
+}
+
+.standings-table th,
+.standings-table td {
+    border: 1px solid #dadada;
+    padding: 10px;
+}
+
+.strong {
+    font-weight: bold;
+}
+
+/* Verdict Color Classes */
+.container .status-ac {
+    background: #c6f6d5; /* green */
+    color: #065f46;
+    font-weight: bold;
+}
+
+.container .status-wa {
+    background: #fef3c7; /* yellow */
+    color: #92400e;
+    font-weight: bold;
+}
+
+.status-err {
+    background: #fecaca; /* red */
+    color: #7f1d1d;
+    font-weight: bold;
+}
+
+.status-na {
+    background: #e5e7eb; /* gray */
+    color: #374151;
+}
+
+/* Empty Row */
+.empty {
+    padding: 20px;
+    color: #666;
+    font-size: 16px;
+}
+
+/* Back Button */
+.back-btn {
+    display: inline-block;
+    margin-top: 20px;
+    background: #444;
+    color: white;
+    padding: 8px 14px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.back-btn:hover {
+    background: #000;
+}

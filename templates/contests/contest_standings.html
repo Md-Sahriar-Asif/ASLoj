@@ -1,0 +1,76 @@
+{% load static %}
+{% load custom_filters %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ contest.name }} — Standings</title>
+
+    <link rel="stylesheet" href="{% static 'css/standings.css' %}">
+</head>
+<body>
+
+{% include "nav.html" %}
+
+<div class="container">
+
+    <h2 class="title">{{ contest.name }} — Standings</h2>
+
+    <div class="card">
+        <div class="card-body">
+
+            <table class="standings-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>User</th>
+                        <th>Total Solve</th>
+                        <th>Penalty</th>
+
+                        {% for problem in problems %}
+                            <th>P{{ forloop.counter }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for row in standings %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ row.user.full_name }}</td>
+                        <td class="strong">{{ row.solved}}</td>
+                        <td>{{ row.penalty|floatformat:0 }}</td>
+
+                        {% for problem in problems %}
+                            {% with status=row.problems|get_item:problem.problem_id %}
+                                <td class="{% if status.status == 'AC' %}status-ac
+                                           {% elif status.status == 'WA' %}status-wa
+                                           {% elif status.status == 'RE' or status.status == 'TLE' %}status-err
+                                           {% else %}status-na{% endif %}">
+                                    {{ status.status }}
+                                </td>
+                            {% endwith %}
+                        {% endfor %}
+
+                    </tr>
+
+                    {% empty %}
+                    <tr>
+                        <td colspan="{{ problems|length|add:'3' }}" class="empty">
+                            No submissions yet.
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+    <a href="{% url 'contest_problems' contest.id %}" class="back-btn">← Back to Problems</a>
+
+</div>
+{% include "footer.html" %}
+</body>
+</html>

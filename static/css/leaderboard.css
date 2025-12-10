@@ -1,0 +1,132 @@
+/* Leaderboard Page Styling */
+:root {
+  --blue: #4834d4;
+  --magenta: #be2edd;
+  --cyan: #22a6b3;
+  --lavender: #a29bfe;
+  --secondary-color: #f4f6fb;
+}
+
+body {
+  background: linear-gradient(120deg, #e0e7ff, #f3e8ff);
+  font-family: "Poppins", sans-serif;
+  color: #333;
+  margin: 0;
+  padding: 20px;
+}
+
+/*Leaderboard Container */
+.leaderboard-container {
+  max-width: 950px;
+  margin: 60px auto;
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+/* Header */
+.leaderboard-header {
+  background: linear-gradient(90deg, var(--magenta), var(--blue));
+  color: white;
+  padding: 25px;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  border-bottom: 4px solid var(--cyan);
+}
+
+/* Table Styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+thead th {
+  background: var(--cyan);
+  color: #fff;
+  padding: 15px;
+  font-size: 1.1rem;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+tbody td {
+  padding: 15px;
+  text-align: center;
+  font-size: 1rem;
+  color: #333;
+  border-bottom: 1px solid #eee;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+tbody tr:hover {
+  background: rgba(34, 166, 179, 0.15);
+  transition: 0.3s ease;
+} 
+
+/* Highlight current user's row */
+.highlight {
+  background: linear-gradient(90deg, var(--blue), var(--magenta));
+  color: white;
+  font-weight: bold;
+}
+
+.highlight td{
+    color: white;
+}
+
+/* Pagination */
+.pagination {
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+  gap: 10px;              
+  padding: 20px;
+  background: #fff;
+}
+
+.pagination a {
+  color: var(--blue);
+  padding: 8px 14px;
+  text-decoration: none;
+  border: 2px solid var(--blue);
+  margin: 0 6px;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: 0.3s ease;
+}
+
+.pagination a.active {
+  background: var(--blue);
+  color: white;
+}
+
+.pagination a:hover {
+  background: var(--cyan);
+  color: white;
+  border-color: var(--cyan);
+}
+
+/* Animation */
+.fade-in {
+  animation: fadeIn 0.8s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

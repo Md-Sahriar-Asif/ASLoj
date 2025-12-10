@@ -1,0 +1,250 @@
+/* ===== Global ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #B49FCC, #52D1DC);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ===== Container ===== */
+.container {
+    width: 100%;
+    max-width: 450px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.container:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+}
+
+/* ===== Header ===== */
+.header {
+    background: #3E4A9D;
+    color: #fff;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: background 0.3s ease;
+}
+
+.header:hover {
+    background: #2E3A7D;
+}
+
+.header .site-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    flex: 1;
+    text-align: center;
+    transition: color 0.3s ease;
+}
+
+.uni-logo, .oj-logo {
+    height: 40px;
+    width: auto;
+    transition: transform 0.3s ease;
+}
+
+.uni-logo:hover, .oj-logo:hover {
+    transform: scale(1.05);
+}
+
+/* ===== Auth Box ===== */
+.content {
+    padding: 30px;
+}
+
+.auth-box {
+    text-align: center;
+}
+
+.auth-title {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: #9A1A7A;
+    transition: color 0.3s ease;
+}
+
+.auth-title:hover {
+    color: #7A1A5A;
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 15px;
+}
+
+/* ===== Labels ===== */
+.auth-form label {
+    text-align: left;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 4px;
+    display: block;
+    transition: color 0.3s ease;
+}
+
+/* ===== Input Fields ===== */
+.auth-form input,
+.auth-form .form-input {
+    width: 100%;
+    padding: 12px 14px;        
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.auth-form input:focus,
+.auth-form .form-input:focus {
+    border-color: #9A1A7A;
+    box-shadow: 0 0 5px rgba(154, 26, 122, 0.3);
+}
+
+/* When invalid */
+.auth-form input.is-invalid{
+    border-color: #e74c3c;
+    background: #fdf2f2;
+    animation: shake 0.3s ease-in-out;
+}
+
+/* ===== Error Messages ===== */
+.error-msg {
+    color: #e74c3c;
+    font-size: 0.85rem;
+    margin: -5px 0 8px 0;
+    text-align: left;
+    font-weight: 500;
+    animation: fadeIn 0.3s ease-in;
+}
+
+.error-msg p {
+    margin: 2px 0;
+}
+
+/* ===== Button ===== */
+.auth-btn {
+    background: #9A1A7A;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.auth-btn:hover {
+    background: #3E4A9D;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(154, 26, 122, 0.4);
+}
+
+.auth-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(154, 26, 122, 0.4);
+}
+
+.auth-btn:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* ===== Text and Links ===== */
+.auth-text {
+    font-size: 0.9rem;
+    color: #333;
+    transition: color 0.3s ease;
+}
+
+.auth-link {
+    color: #52D1DC;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.auth-link:hover {
+    color: #3A9FB7;
+    text-decoration: underline;
+    transform: scale(1.05);
+}
+
+.auth-link:active {
+    color: #2A7F97;
+}
+
+/* ===== Animations ===== */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-3px); }
+    20%, 40%, 60%, 80% { transform: translateX(3px); }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===== Responsive Design ===== */
+@media (max-width: 480px) {
+    .container {
+        max-width: 95%;
+        margin: 10px;
+    }
+
+    .content {
+        padding: 20px;
+    }
+
+    .auth-title {
+        font-size: 1.3rem;
+    }
+
+    .auth-btn {
+        padding: 12px;
+        font-size: 0.95rem;
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+

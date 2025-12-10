@@ -1,0 +1,238 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #f9f9f9;
+    padding: 20px;
+    margin: 0;
+}
+form {
+    background: #fff;
+    padding: 15px;
+    border-radius: 5px;
+}
+button {
+    background: #007BFF;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 3px;
+}
+
+/* =============== */
+
+:root{
+    --lavender: #b49fcc;
+    --magenta: #9a1a7a;
+    --cyan: #52d1dc;
+    --blue: #3e4a9d;
+    --navy_blue: #2c3e50;
+    --blue_grey: #34495e;
+
+    --primary-color: #1a73e8;
+    --secondary-color: #f8f9fa;
+    --success-color: #28a745;
+    --warning-color: #ffc107;
+    --danger-color: #dc3545;
+    --info-color: #17a2b8;
+}
+
+/* Navbar container */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--blue);
+    padding: 1rem, 0;
+}
+
+/* Logo / brand */
+.navbar .logo {
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: none;
+    margin: 0 2rem;
+}
+
+.navbar .logo img {
+    height: 70px;
+    width: auto;
+    max-width: 150px;
+}
+
+/* Navbar links */
+.navbar ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+
+    margin: 0 2rem;
+}
+
+.navbar ul li {
+    margin-left: 2rem;
+}
+
+.navbar ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.navbar ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Hamburger menu (mobile only) */
+.menu-toggle {
+    display: none;
+    font-size: 24px;
+    color: white;
+    cursor: pointer;
+    margin: 0 2rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .navbar ul {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background-color:  var(--blue);
+        position: absolute;
+        top: 60px;
+        left: 0;
+    }
+
+    .navbar ul.show {
+        display: flex;
+    }
+
+    .menu-toggle {
+        display: block;
+        margin: 0 2rem;
+    }
+}
+
+/* ============ */
+
+.profile-header {
+    background: linear-gradient(135deg, var(--magenta) 0%, var(--blue) 100%);
+    color: white;
+    padding: 2rem;
+    border-radius: 6px 6px 0 0;
+    position: center;
+    overflow: hidden;
+}
+
+.profile-avatar {
+    width: 120px;
+    height: 120px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.rating-badge, badge {
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.bg-light {
+    background: var(--blue_grey);
+}
+
+.rating-master { background: linear-gradient(45deg, #ff6b6b, #ee5a24); color: white; }
+.rating-expert { background: linear-gradient(45deg, #4834d4, #686de0); color: white; }
+.rating-specialist { background: linear-gradient(45deg, #00d2d3, #54a0ff); color: white; }
+.rating-pupil { background: linear-gradient(45deg, #5f27cd, #a55eea); color: white; }
+.rating-newbie { background: linear-gradient(45deg, #74b9ff, #0984e3); color: white; }
+
+.card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.stat-card {
+    text-align: center;
+    padding: 2rem 1rem;
+}
+
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.stat-label {
+    color: #666;
+    font-weight: 500;
+}
+
+.progress-custom {
+    height: 8px;
+    border-radius: 4px;
+    background-color: red;
+}
+
+.progress-bar-custom {
+    border-radius: 4px;
+    background: linear-gradient(90deg, var(--success-color), var(--info-color));
+}
+
+.achievement-badge {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    margin: 0.25rem;
+    background: var(--cyan);
+    color: #333;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.contest-history {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.contest-item {
+    border-left: 4px solid var(--primary-color);
+    padding-left: 1rem;
+    margin-bottom: 1rem;
+}
+
+.contest-rating-up {
+    color: var(--success-color);
+}
+
+.contest-rating-down {
+    color: var(--danger-color);
+}
+
+@media (max-width: 768px) {
+
+    .profile-header {
+        text-align: center;
+    }
+
+    .stat-number {
+        font-size: 2rem;
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.8s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}

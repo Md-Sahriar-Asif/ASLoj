@@ -1,0 +1,121 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home | ASLOJ</title>
+  <link rel="stylesheet" href="{% static 'css/home.css' %}">
+</head>
+<body>
+
+  {% include "nav.html" %}
+
+  <div class="home-container fade-in">
+
+    <!-- Welcome Section -->
+    <section class="welcome">
+      <h2>Welcome, {{ request.user.full_name }} 👋</h2>
+      <p><i>"One solve a day keeps the unemployment away."</i></p>
+    </section>
+
+    <!-- 🧠 Recent Submissions -->
+    <section class="recent-submissions">
+      <h3>🧠 Your Recent Submissions</h3>
+      {% if recent_submissions %}
+        <table class="submission-table">
+          <thead>
+            <tr>
+              <th>Problem</th>
+              <th>Language</th>
+              <th>Status</th>
+              <th>Time</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for sub in recent_submissions %}
+              <tr>
+                <td>{{ sub.problem.title }}</td>
+                <td>{{ sub.get_language_display }}</td>
+                <td class="status {{ sub.status|lower }}">{{ sub.get_status_display }}</td>
+                <td>{{ sub.created_at|date:"M d, Y H:i" }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      {% else %}
+        <p>You have not made any submissions yet.</p>
+      {% endif %}
+    </section>
+
+    <!--Top Performers-->
+    <section class="top-performers">
+      <h3>🏆 Top Performers</h3>
+      <div class="performer-list">
+        {% for user in top_users %}
+          <div class="performer-card">
+            <h4>{{ forloop.counter }}. {{ user.full_name }}</h4>
+            <p>ID: {{ user.university_id }}</p>
+            <span>{{ user.points }} pts</span>
+          </div>
+        {% empty %}
+          <p>No users available yet.</p>
+        {% endfor %}
+      </div>
+    </section>
+
+
+
+<!--      &lt;!&ndash; Top Performers &ndash;&gt;-->
+<!--        <section class="top-performers mb-4">-->
+<!--          <h3>🏆 Top Performers</h3>-->
+<!--          {% if top_users %}-->
+<!--            <ul class="list-group list-group-flush">-->
+<!--              {% for user in top_users %}-->
+<!--                <li class="list-group-item d-flex justify-content-between align-items-center hover-shadow">-->
+<!--                  <div>-->
+<!--                    <a href="{% url 'user_profile' user.university_id %}" class="fw-bold text-decoration-none text-dark">-->
+<!--                      {{ forloop.counter }}. {{ user.full_name }}-->
+<!--                    </a>-->
+<!--                    <small class="text-muted">ID: {{ user.university_id }}</small>-->
+<!--                  </div>-->
+<!--                  <span class="badge bg-primary rounded-pill">{{ user.points }} pts</span>-->
+<!--                </li>-->
+<!--              {% endfor %}-->
+<!--            </ul>-->
+<!--          {% else %}-->
+<!--            <p class="text-muted">No users available yet.</p>-->
+<!--          {% endif %}-->
+<!--        </section>-->
+
+
+
+    <!-- Upcoming Contests -->
+    <section class="upcoming-contests">
+      <h3>🚀 Upcoming Contests</h3>
+      {% for contest in upcoming_contests %}
+        <div class="contest-card">
+          <h4>
+            <a style="text-decoration: none" href="{% url 'contest_detail' contest.pk %}">
+              {{ contest.name }}
+            </a>
+          </h4>
+          <p>{{ contest.description|truncatewords:20 }}</p>
+          <p><strong>Starts:</strong> {{ contest.start_time|date:"M d, Y H:i" }}</p>
+        </div>
+      {% empty %}
+        <p>No upcoming contests right now.</p>
+      {% endfor %}
+    </section>
+
+    <!-- Community Section -->
+    <section class="community">
+      <h3>💬 Join the Community</h3>
+      <p>Connect with other problem solvers, discuss challenges, and share knowledge.</p>
+      <a href="{% url 'community' %}" class="join-btn">Join Now</a>
+    </section>
+
+  </div>
+{% include "footer.html" %}
+</body>
+</html>

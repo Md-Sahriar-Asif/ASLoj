@@ -1,0 +1,158 @@
+:root {
+  --blue: #4834d4;
+  --magenta: #be2edd;
+  --cyan: #22a6b3;
+  --lavender: #a29bfe;
+  --secondary: #f4f6fb;
+}
+
+body {
+  background: linear-gradient(120deg, #e0e7ff, #f3e8ff);
+  font-family: "Poppins", sans-serif;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+.home-container {
+  max-width: 1000px;
+  margin: 50px auto;
+  padding: 30px;
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 6px 25px rgba(0,0,0,0.1);
+}
+
+section {
+  margin-bottom: 40px;
+}
+
+.welcome {
+  text-align: center;
+}
+
+.welcome h2 {
+  color: var(--blue);
+  font-size: 1.8rem;
+}
+
+.welcome p {
+  font-size: 1rem;
+  color: #666;
+}
+
+/* Top Performers */
+.top-performers h3,
+.upcoming-contests h3,
+.community h3 {
+  color: var(--magenta);
+  margin-bottom: 15px;
+}
+
+.performer-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 15px;
+}
+
+.performer-card {
+  background: var(--secondary);
+  border-radius: 10px;
+  padding: 15px;
+  text-align: center;
+  transition: 0.3s ease;
+}
+
+.performer-card:hover {
+  background: var(--cyan);
+  color: #fff;
+}
+
+/* Upcoming Contests */
+.contest-card {
+  background: var(--secondary);
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  transition: 0.3s;
+}
+
+.contest-card:hover {
+  background: linear-gradient(90deg, var(--cyan), var(--blue));
+  color: #fff;
+}
+
+/* 🧠 Recent Submissions Section */
+.recent-submissions {
+  margin-top: 30px;
+}
+
+.recent-submissions h3 {
+  color: var(--magenta);
+  margin-bottom: 15px;
+}
+
+.submission-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.submission-table th,
+.submission-table td {
+  text-align: center;
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+}
+
+.submission-table th {
+  background: var(--cyan);
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.submission-table tr:nth-child(even) {
+  background: #f9f9f9;
+}
+
+/* ✅ Status colors */
+.status.ac { color: green; font-weight: 600; }
+.status.wa { color: red; font-weight: 600; }
+.status.re { color: orange; font-weight: 600; }
+.status.tle { color: #ff7b00; font-weight: 600; }
+.status.p { color: #FFC107; font-style: italic; }
+
+
+/* Community Section */
+.community {
+  text-align: center;
+}
+
+.join-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background: var(--blue);
+  color: white;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.3s ease;
+}
+
+.join-btn:hover {
+  background: var(--magenta);
+}
+
+/* Animation */
+.fade-in {
+  animation: fadeIn 0.8s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}

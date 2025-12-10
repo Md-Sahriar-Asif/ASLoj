@@ -1,0 +1,91 @@
+.group-page :root {
+  --blue: #4834d4;
+  --magenta: #be2edd;
+  --cyan: #22a6b3;
+  --secondary: #f4f6fb;
+}
+
+/* Fade In Animation */
+.group-page .fade-in {
+  animation: fadeIn 0.8s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Container */
+.group-page .group-container,
+.group-page .form-container {
+  max-width: 800px;
+  margin: 30px auto;
+  background: #fff;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+/* Section Headings */
+.group-page h2,
+.group-page h3 {
+  color: var(--magenta);
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Buttons */
+.group-page .btn-create,
+.group-page .btn {
+  padding: 8px 15px;
+  border-radius: 8px;
+  text-decoration: none;
+  color: white;
+  font-weight: 500;
+  transition: 0.3s;
+}
+.group-page .btn-create { background: var(--blue); }
+.group-page .btn-invite { background: var(--cyan); }
+.group-page .btn-leave { background: #f1c40f; }
+.group-page .btn-delete { background: #e74c3c; }
+.group-page .btn-accept { background: var(--blue); }
+.group-page .btn-decline { background: #c0392b; }
+.group-page .btn-submit { background: var(--magenta); border: none; cursor: pointer; }
+.group-page .btn:hover { opacity: 0.8; }
+
+/* Cards */
+.group-page .group-card,
+.group-page .invitation-card {
+  background: var(--secondary);
+  border-radius: 12px;
+  padding: 20px;
+  transition: 0.3s;
+}
+.group-page .group-card:hover,
+.group-page .invitation-card:hover {
+  transform: translateY(-5px);
+  background: linear-gradient(90deg, var(--cyan), #f4f6fb);
+  color: black;
+}
+
+/* Layout */
+.group-page .group-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+/* Input Fields */
+.group-page .input-field {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid var(--cyan);
+  border-radius: 8px;
+  margin-bottom: 15px;
+  font-size: 1rem;
+}
+.group-page .input-field:focus {
+  outline: none;
+  border-color: var(--blue);
+}

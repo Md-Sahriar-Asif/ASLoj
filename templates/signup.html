@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block title %}Signup | Online Judge{% endblock %}
+
+{% block content %}
+<div class="auth-box">
+    <h2 class="auth-title">Create Account</h2>
+
+    <!-- Non-field errors (like unique constraints) -->
+    {% if form.non_field_errors %}
+        <div class="error-box">
+            {% for error in form.non_field_errors %}
+                <p class="error-msg">{{ error }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <form method="POST" enctype="multipart/form-data" class="auth-form">
+        {% csrf_token %}
+
+        <!-- Full Name -->
+        <label for="id_full_name">Full Name</label>
+        {{ form.full_name }}
+        {% if form.full_name.errors %}
+            {% for error in form.full_name.errors %}
+                <p class="error-msg">{{ error }}</p>
+            {% endfor %}
+        {% endif %}
+
+        <!-- University ID -->
+        <label for="id_university_id">University ID</label>
+        {{ form.university_id }}
+        {% if form.university_id.errors %}
+            {% for error in form.university_id.errors %}
+                <p class="error-msg">{{ error }}</p>
+            {% endfor %}
+        {% endif %}
+
+        <!-- Email -->
+        <label for="id_email">Email</label>
+        {{ form.email }}
+        {% if form.email.errors %}
+            {% for error in form.email.errors %}
+                <p class="error-msg">{{ error }}</p>
+            {% endfor %}
+        {% endif %}
+
+        <!-- Password -->
+        <label for="id_password">Password</label>
+        {{ form.password }}
+        {% if form.password.errors %}
+            {% for error in form.password.errors %}
+                <p class="error-msg">{{ error }}</p>
+            {% endfor %}
+        {% endif %}
+
+        <!-- Profile Picture -->
+        <label for="id_pfp">Profile Picture (optional)</label>
+        {{ form.pfp }}
+        {% if form.pfp.errors %}
+            {% for error in form.pfp.errors %}
+                <p class="error-msg">{{ error }}</p>
+            {% endfor %}
+        {% endif %}
+
+        <button type="submit" class="auth-btn">Sign Up</button>
+    </form>
+
+    <p><a href="{% url 'password_reset' %}" class="auth-link">Forgot your password?</a></p>
+
+    <p class="auth-text">Already have an account?
+        <a href="{% url 'login' %}" class="auth-link">Login</a>
+    </p>
+</div>
+{% endblock %}

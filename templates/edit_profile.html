@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Profile | Online Judge{% endblock %}
+
+{% block content %}
+<div class="auth-box">
+    <h2 class="auth-title">Edit Profile</h2>
+
+    <form method="POST" enctype="multipart/form-data" class="auth-form">
+        {% csrf_token %}
+
+        <!-- Full Name -->
+        <label for="id_full_name">Full Name</label>
+        {{ form.full_name }}
+        {% if form.full_name.errors %}
+            {% for error in form.full_name.errors %}
+                <p class="error-msg">{{ error }}</p>
+            {% endfor %}
+        {% endif %}
+
+        <!-- Profile Picture -->
+        <label for="id_pfp">Profile Picture</label>
+        {{ form.pfp }}
+        {% if form.pfp.errors %}
+            {% for error in form.pfp.errors %}
+                <p class="error-msg">{{ error }}</p>
+            {% endfor %}
+        {% endif %}
+
+        {% if user.pfp %}
+            <div class="pfp-preview">
+                <p>Current Picture:</p>
+                <img src="{{ user.pfp.url }}" alt="Current Avatar"
+                     class="pfp-img"
+                     style="width: 200px; height: 200px; object-fit: cover; border-radius: 50%;">
+            </div>
+        {% endif %}
+
+        <button type="submit" class="auth-btn">Save Changes</button>
+        <a href="{% url 'profile' %}" class="auth-link">Cancel</a>
+    </form>
+</div>
+{% endblock %}

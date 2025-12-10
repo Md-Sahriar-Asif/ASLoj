@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Community Discussions</title>
+  <link rel="stylesheet" href="{% static 'css/community.css' %}">
+</head>
+<body>
+  {% include "nav.html" %}
+
+  <div class="container">
+    <h2>💬 Community Discussions</h2>
+
+    <!-- Create New Discussion -->
+    <form method="POST" class="new-discussion-form">
+      {% csrf_token %}
+      <input type="text" name="title" placeholder="Enter discussion title" required>
+      <textarea name="content" rows="3" placeholder="Write your thoughts..." required></textarea>
+      <button type="submit">Post Discussion</button>
+    </form>
+
+    <hr>
+
+    <!-- List of Discussions -->
+    {% for d in discussions %}
+      <div class="discussion-card">
+        <h3><a href="{% url 'discussion_detail' d.id %}">{{ d.title }}</a></h3>
+        <p>{{ d.content|truncatechars:200 }}</p>
+        <div class="meta">
+          Posted by <b>{{ d.author.full_name }}</b> on {{ d.created_at|date:"M d, Y H:i" }}
+        </div>
+      </div>
+    {% empty %}
+      <p>No discussions yet. Be the first to start one!</p>
+    {% endfor %}
+  </div>
+
+</body>
+</html>

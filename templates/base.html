@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Online Judge{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/auth_base.css' %}">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <img src="{% static 'images/uni_logo.png' %}" alt="University Logo" class="uni-logo">
+            <h1 class="site-title">ASLOJ - Online Judge</h1>
+            <img src="{% static 'images/logo.png' %}" alt="OJ Logo" class="oj-logo">
+        </header>
+
+        {% block navbar %}{% endblock %}
+
+        <main class="content">
+            {% block content %}{% endblock %}
+        </main>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Highlight fields with existing errors
+        const errorMessages = document.querySelectorAll('.error-msg');
+
+        errorMessages.forEach(function(errorMsg) {
+            let inputField = errorMsg.previousElementSibling;
+
+            while (inputField && inputField.tagName !== 'INPUT') {
+                inputField = inputField.previousElementSibling;
+            }
+
+            if (inputField) {
+                inputField.classList.add('is-invalid');
+            }
+        });
+
+
+        // Real-time validation on blur and input
+        const inputs = document.querySelectorAll('.auth-form input');
+        inputs.forEach(function(input) {
+            input.addEventListener('blur', function() {
+                validateInput(this);
+            });
+
+            input.addEventListener('input', function() {
+                if (this.classList.contains('is-invalid')) {
+                    this.classList.remove('is-invalid');
+                }
+            });
+        });
+
+        function validateInput(input) {
+            const value = input.value.trim();
+            let isValid = true;
+
+            // Email validation
+            if (input.type === 'email' || input.name === 'username' || input.name === 'email') {
+                if (!value.includes('@') || !value.endsWith('@uap-bd.edu')) {
+                    isValid = false;
+                }
+            }
+
+
+            // Required field validation
+            if (input.hasAttribute('required') && !value) {
+                isValid = false;
+            }
+
+            // Apply visual styling
+            if (!isValid) {
+                input.classList.add('is-invalid');
+            } else {
+                input.classList.remove('is-invalid');
+            }
+        }
+    });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}Login | Online Judge{% endblock %}
+
+{% block content %}
+<div class="auth-box">
+    <h2 class="auth-title">Login</h2>
+
+    <!-- Non-field errors (like invalid credentials) -->
+    {% if form.non_field_errors %}
+        <div class="error-box">
+            {% for error in form.non_field_errors %}
+                <p class="error-msg">{{ error }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <form method="POST" class="auth-form">
+        {% csrf_token %}
+
+        <!-- Email -->
+        <label for="id_username">Email</label>
+        {{ form.username }}
+        {% if form.username.errors %}
+            {% for error in form.username.errors %}
+                <p class="error-msg">{{ error }}</p>
+            {% endfor %}
+        {% endif %}
+
+        <!-- Password -->
+        <label for="id_password">Password</label>
+        {{ form.password }}
+        {% if form.password.errors %}
+            {% for error in form.password.errors %}
+                <p class="error-msg">{{ error }}</p>
+            {% endfor %}
+        {% endif %}
+
+        <button type="submit" class="auth-btn">Login</button>
+    </form>
+
+    <p><a href="{% url 'password_reset' %}" class="auth-link">Forgot your password?</a></p>
+
+    <p class="auth-text">Don't have an account?
+        <a href="{% url 'signup' %}" class="auth-link">Sign up</a>
+    </p>
+</div>
+{% endblock %}

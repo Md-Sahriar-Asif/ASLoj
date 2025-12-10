@@ -1,0 +1,45 @@
+{% extends "nav.html" %}
+{% load static %}
+
+{% block content %}
+<div class="group-page">
+    <link rel="stylesheet" href="{% static 'css/groups.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<div class="group-container fade-in">
+  <h2>👥 {{ group.name }}</h2>
+
+  <h3>Members</h3>
+  <ul>
+    {% for member in members %}
+      <li>
+        {{ member.full_name }} ({{ member.email }})
+        {% if is_creator and member != request.user %}
+            <a href="{% url 'remove_member' group.id member.id %}" class="btn btn-danger btn-sm py-0 px-1">Remove</a>
+
+        {% endif %}
+      </li>
+    {% empty %}
+      <p>No members yet.</p>
+    {% endfor %}
+  </ul>
+
+  {% if is_creator %}
+    <hr>
+    <h3>Invite New Member</h3>
+    {% if request.user in members %}
+        <form method="POST" action="{% url 'invite_member' group.id %}">
+            {% csrf_token %}
+            <input type="email" name="email" placeholder="Enter user's email" required class="input-field">
+            <button type="submit" class="btn btn-submit">Invite</button>
+        </form>
+    {% endif %}
+    <a href="{% url 'delete_group' group.id %}" class="btn btn-delete" style="margin-top:15px;">Delete Group</a>
+  {% else %}
+    <a href="{% url 'leave_group' group.id %}" class="btn btn-leave" style="margin-top:15px;">Leave Group</a>
+  {% endif %}
+</div>
+</div>
+{% include "footer.html" %}
+{% endblock %}
+
