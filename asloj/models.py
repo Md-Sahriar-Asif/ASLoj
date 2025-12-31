@@ -196,21 +196,33 @@ class Contest(models.Model):
         return self.start_time <= now <= self.end_time
 
     def user_points(self, user):
-        """
-        Calculate total points for a user in this contest.
-        Only the best submission per problem counts.
-        """
         total_points = 0
-        problems = self.problems.all()
-        for problem in problems:
-            best_submission = self.submissions.filter(
+
+        for problem in self.problems.all():
+            subs = ContestSubmission.objects.filter(
+                contest=self,
                 user=user,
-                problem=problem,
-                status="AC"  # optional: only count accepted submissions
-            ).order_by('-points').first()
-            if best_submission:
-                total_points += best_submission.points
-        return total_points
+                problem=problem
+            ).order_by("created_at")
+
+            ac = subs.filter(status="AC").first()
+            if not ac:
+                continue
+
+            wrong_before_ac = subs.filter(
+                created_at__lt=ac.created_at,
+                status__in=["WA", "RE", "TLE"]
+            ).count()
+
+            time_from_start = (ac.created_at - self.start_time).total_seconds() / 60
+
+            penalty = time_from_start + (wrong_before_ac * 20)
+
+            points = max(0, 100 - penalty)
+            total_points += points
+
+        return int(total_points)
+
 
 class ContestRegistration(models.Model):
     contest = models.ForeignKey(Contest, on_delete=models.CASCADE, related_name='registrations')
